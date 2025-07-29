@@ -1,2 +1,27 @@
-# testaja
-TEST AJA YA
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Ambil Data Sheet</title>
+</head>
+<body>
+  <h1>Data dari Google Sheets</h1>
+  <ul id="data-list"></ul>
+
+  <script>
+    fetch("[https://script.google.com/macros/s/AKfycb.../exec](https://script.google.com/macros/s/AKfycbz18VrmRMZgmFiukKbJveShsJdynNa9SeFpae_CgRur1_jIRwbDQGWQJ6uL9IJhbiLO/exec)") // URL dari Web App kamu
+      .then(res => res.json())
+      .then(data => {
+        const list = document.getElementById('data-list');
+        data.forEach(row => {
+          const li = document.createElement('li');
+          li.textContent = row.join(" | ");
+          list.appendChild(li);
+        });
+      })
+      .catch(err => {
+        console.error("Gagal ambil data:", err);
+      });
+  </script>
+</body>
+</html>
