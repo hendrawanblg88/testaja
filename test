@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Data dari Google Sheets</title>
+  <meta charset="UTF-8">
+  <title>Ambil Data Sheet</title>
 </head>
 <body>
   <h1>Data dari Google Sheets</h1>
-  <div id="output"></div>
+  <ul id="data-list"></ul>
 
   <script>
-    const sheetUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS5Z7BbTgUC3J4n9LFYF3Uaqs7E853UW6LshGBwOnOCtMZD9rBv0UkgQ-AV_6f8h_2m90CYHwgIPHmP/pub?gid=1556757093&single=true&output=csv';
-
-    fetch(sheetUrl)
-      .then(response => response.text())
+    fetch("[https://script.google.com/macros/s/AKfycb.../exec](https://script.google.com/macros/s/AKfycbz18VrmRMZgmFiukKbJveShsJdynNa9SeFpae_CgRur1_jIRwbDQGWQJ6uL9IJhbiLO/exec)") // URL dari Web App kamu
+      .then(res => res.json())
       .then(data => {
-        const rows = data.split('\n');
-        const output = document.getElementById('output');
-        rows.forEach(row => {
-          const cols = row.split(',');
-          const p = document.createElement('p');
-          p.textContent = cols.join(' | ');
-          output.appendChild(p);
+        const list = document.getElementById('data-list');
+        data.forEach(row => {
+          const li = document.createElement('li');
+          li.textContent = row.join(" | ");
+          list.appendChild(li);
         });
+      })
+      .catch(err => {
+        console.error("Gagal ambil data:", err);
       });
   </script>
 </body>
