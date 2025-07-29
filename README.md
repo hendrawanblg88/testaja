@@ -57,7 +57,7 @@
   <div id="result"></div>
 
   <script>
-    const endpoint = "https://script.google.com/macros/s/YOUR_DEPLOYED_SCRIPT_ID/exec";
+    const endpoint = "https://script.google.com/macros/s/AKfycbz18VrmRMZgmFiukKbJveShsJdynNa9SeFpae_CgRur1_jIRwbDQGWQJ6uL9IJhbiLO/exec";
     let rowIndex = null;
     let hadiahList = [1000, 2000, 3000, 5000, 8000, 10000, 100000, 1000000, 10000000];
 
