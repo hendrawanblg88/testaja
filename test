@@ -9,7 +9,7 @@
   <ul id="data-list"></ul>
 
   <script>
-    fetch("[https://script.google.com/macros/s/AKfycb.../exec](https://script.google.com/macros/s/AKfycbz18VrmRMZgmFiukKbJveShsJdynNa9SeFpae_CgRur1_jIRwbDQGWQJ6uL9IJhbiLO/exec)") // URL dari Web App kamu
+    fetch("https://script.google.com/macros/s/AKfycbz18VrmRMZgmFiukKbJveShsJdynNa9SeFpae_CgRur1_jIRwbDQGWQJ6uL9IJhbiLO/exec")
       .then(res => res.json())
       .then(data => {
         const list = document.getElementById('data-list');
