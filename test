@@ -1,27 +1,46 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Ambil Data Sheet</title>
+  <title>Validasi Kupon</title>
 </head>
 <body>
-  <h1>Data dari Google Sheets</h1>
-  <ul id="data-list"></ul>
+  <h1>🎁 Cek Kupon Mystery Box 🎁</h1>
+
+  <input type="text" id="idInput" placeholder="Masukkan ID">
+  <input type="text" id="kuponInput" placeholder="Masukkan Kode Kupon">
+  <button onclick="cekKupon()">Cek</button>
+
+  <p id="hasil"></p>
 
   <script>
-    fetch("https://script.google.com/macros/s/AKfycbz18VrmRMZgmFiukKbJveShsJdynNa9SeFpae_CgRur1_jIRwbDQGWQJ6uL9IJhbiLO/exec")
-      .then(res => res.json())
-      .then(data => {
-        const list = document.getElementById('data-list');
-        data.forEach(row => {
-          const li = document.createElement('li');
-          li.textContent = row.join(" | ");
-          list.appendChild(li);
-        });
-      })
-      .catch(err => {
-        console.error("Gagal ambil data:", err);
-      });
+    async function cekKupon() {
+      const id = document.getElementById("idInput").value.trim().toUpperCase();
+      const kupon = document.getElementById("kuponInput").value.trim().toUpperCase();
+      const hasil = document.getElementById("hasil");
+
+      try {
+        const response = await fetch("https://script.google.com/macros/s/AKfycb.../exec");
+        const data = await response.json();
+
+        let status = "Kupon tidak ditemukan";
+        for (let i = 1; i < data.length; i++) {
+          const sheetId = String(data[i][0]).toUpperCase();
+          const sheetKupon = String(data[i][1]).toUpperCase();
+          const statusKupon = String(data[i][2]).toLowerCase();
+
+          if (sheetId === id && sheetKupon === kupon) {
+            status = (statusKupon === "belum") ? "✅ Kupon VALID, belum digunakan!" : "⚠️ Kupon SUDAH digunakan.";
+            break;
+          }
+        }
+        hasil.textContent = status;
+
+      } catch (error) {
+        console.error("Gagal mengambil data:", error);
+        hasil.textContent = "Terjadi kesalahan saat memuat data.";
+      }
+    }
   </script>
 </body>
 </html>
